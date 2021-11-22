@@ -418,7 +418,10 @@ static NSString *const CHANNEL_NAME = @"flutter_webview_plugin";
     forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
 
     if (!navigationAction.targetFrame.isMainFrame) {
-        [webView loadRequest:navigationAction.request];
+       // [webView loadRequest:navigationAction.request];
+               id data = @{@"url": navigationAction.request.URL.absoluteString};
+               //[webView loadRequest:navigationAction.request];
+               [channel invokeMethod:@"onTargetChanged" arguments:data];
     }
 
     return nil;

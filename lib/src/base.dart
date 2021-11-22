@@ -58,6 +58,9 @@ class FlutterWebviewPlugin {
       case 'onUrlChanged':
         _onUrlChanged.add(call.arguments['url']);
         break;
+      case 'onTargetChanged':
+        _onTargetChanged.add(call.arguments['url']);
+        break;
       case 'onScrollXChanged':
         _onScrollXChanged.add(call.arguments['xDirection']);
         break;
