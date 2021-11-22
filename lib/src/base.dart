@@ -284,6 +284,7 @@ class FlutterWebviewPlugin {
   void dispose() {
     _onDestroy.close();
     _onUrlChanged.close();
+    _onTargetChanged.close();
     _onStateChanged.close();
     _onProgressChanged.close();
     _onScrollXChanged.close();
