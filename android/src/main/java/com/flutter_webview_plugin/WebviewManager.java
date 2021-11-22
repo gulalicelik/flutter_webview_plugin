@@ -21,6 +21,8 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.provider.MediaStore;
 
+import android.util.Log;
+
 import androidx.core.content.FileProvider;
 
 import android.database.Cursor;
@@ -175,6 +177,17 @@ class WebviewManager {
 
         webView.setWebViewClient(webViewClient);
         webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onCreateWindow(WebView view, boolean dialog, boolean userGesture, android.os.Message resultMsg)
+            {
+                WebView.HitTestResult result = view.getHitTestResult();
+                String url = result.getExtra();
+                Map<String, Object> data = new HashMap<>();
+                data.put("url", url);
+                FlutterWebviewPlugin.channel.invokeMethod("onTargetChanged", data);
+                return false;
+            }
+
             //The undocumented magic method override
             //Eclipse will swear at you if you try to put @Override here
             // For Android 3.0+
